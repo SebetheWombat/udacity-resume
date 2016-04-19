@@ -1,4 +1,3 @@
-
 var bio = {
 	"name": "Sarah Keller",
 	"role": "Web Developer",
@@ -23,6 +22,7 @@ if(bio.skills.length > 0){
 		$("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
 	}
 }
+
 var work = {
 	"jobs" : [{
 		"employer" : "Maine Sport Outfitters",
@@ -110,6 +110,18 @@ var projects = {
 	]
 }
 
+var projectsDisplay = function(){
+	for(item in projects.project){
+		$("#projects").append(HTMLprojectStart);
+		var named = HTMLprojectTitle.replace("%data%", projects.project[item].title);
+		var date = HTMLprojectDates.replace("%data%", projects.project[item].completed);
+		var des = HTMLprojectDescription.replace("%data%", projects.project[item].description);
+		var img = HTMLprojectImage.replace("%data%", projects.project[item].images);
+		$(".project-entry:last").append(named + date + des);
+		
+	}
+}
+projectsDisplay();
 var education = {
 	"school" : 
 	{
@@ -143,28 +155,52 @@ var education = {
 	},
 	{
 		"title" : "JavaScript",
-		"school" : "codecademy",
+		"school" : "Codecademy",
 		"url" : "https://www.codecademy.com/learn/javascript",
-		"complete" : "September 2015"
+		"completed" : "September 2015"
 	},
 	{
 		"title": "Learn the Command Line",
-		"School" : "Codecademy",
+		"school" : "Codecademy",
 		"url" : "https://www.codecademy.com/learn/learn-the-command-line",
 		"completed": "October 2015"
 	},
 	{
 		"title" : "Learn SQL",
-		"School" : "Codecademy",
+		"school" : "Codecademy",
 		"url": "https://www.codecademy.com/learn/learn-sql",
 		"completed" : "November 2015"
 	},
 	{
 		"title" : "JQuery",
-		"School" : "Codecademy",
+		"school" : "Codecademy",
 		"url" : "https://www.codecademy.com/learn/jquery",
 		"completed" : "December 2015"
 	}
 	]
 }
 
+function displayEdu(){
+	$("#education").append(HTMLschoolStart);
+	var name = HTMLschoolName.replace("%data%", education.school.name);
+	var deg = HTMLschoolDegree.replace("%data%", education.school.degree);
+	var date = HTMLschoolDates.replace("%data%", education.school.dates);
+	var loc = HTMLschoolLocation.replace("%data%", education.school.city);
+	var maj = HTMLschoolMajor.replace("%data%", education.school.major);
+	
+	$(".education-entry:last").append(name + deg + date + loc + maj);
+	$(".education-entry:last").append(HTMLonlineClasses);
+	for(var course in education.online){
+		
+		var title = HTMLonlineTitle.replace("%data%", education.online[course].title);
+		var school = HTMLonlineSchool.replace("%data%", education.online[course].school);
+		var dates = HTMLonlineDates.replace("%data%", education.online[course].completed);
+		var url = HTMLonlineURL.replace("%data%", education.online[course].url);
+		
+		$(".education-entry:last").append(title + school + dates + url);
+	}
+}
+
+displayEdu();
+
+$("#mapDiv").append(googleMap);
